@@ -1,42 +1,26 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 include "dbconnect.php";
 
-if (
-    !isset($_POST['enrollment']) ||
-    !isset($_POST['wpm']) ||
-    !isset($_POST['quiz'])
-) {
-    echo "invalid_request";
-    exit;
-}
+$enrollment = $_POST['enrollment'];
+$wpm = $_POST['wpm'];
+$accuracy = $_POST['accuracy'];
+$quiz_score = $_POST['quiz_score'];
 
-$enrollment = trim($_POST['enrollment']);
-$wpm = trim($_POST['wpm']);
-$quiz = trim($_POST['quiz']);
+/* Typing Score Formula */
+$typing_score = $wpm * ($accuracy / 100);
 
-/*
-CASE-INSENSITIVE + TRIM-SAFE UPDATE
-*/
 $query = "
-    UPDATE `user`
-    SET wpm = '$wpm',
-        quiz = '$quiz'
-    WHERE TRIM(LOWER(enrollment)) = TRIM(LOWER('$enrollment'))
+UPDATE user
+SET
+    wpm = '$wpm',
+    accuracy = '$accuracy',
+    typing_score = '$typing_score',
+    quiz_score = '$quiz_score'
+WHERE enrollment = '$enrollment'
 ";
 
-$result = mysqli_query($conn, $query);
-
-if (!$result) {
-    echo "sql_error: " . mysqli_error($conn);
-    exit;
+if (mysqli_query($conn, $query)) {
+    echo "success";
+} else {
+    echo "error";
 }
-
-if (mysqli_affected_rows($conn) === 0) {
-    echo "no_row_updated";
-    exit;
-}
-
-echo "success";

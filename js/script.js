@@ -16,14 +16,14 @@ function togglePassword() {
 document.getElementById("loginForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const username = document.getElementById("username").value.trim();
+    const name = document.getElementById("name").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    if (username === "" || password === "") {
+    if (name === "" || password === "") {
         alert("All fields are required!");
         return;
     }
-    else if (username === "admin" || password === "123")
+    else if (name === "admin" || password === "123")
     {
         alert("Login successfull!!")
         window.location.href = "home.php";

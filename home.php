@@ -2,38 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Dashboard</title>
+    <title>User Scores Dashboard</title>
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 
 <div class="box">
-    <h2>Search by Enrollment</h2>
-
-    <input type="text" id="enrollment"
-           placeholder="Start typing enrollment number..."
-           autocomplete="off">
-
-    <h3 class="table-title">Users</h3>
+    <h2>User Competition Records</h2>
+<br>
+    <input
+        type="text"
+        id="enrollment"
+        placeholder="Search by enrollment..."
+        autocomplete="off"
+    >
 
     <table>
         <thead>
             <tr>
                 <th>Enrollment</th>
-                <th>Username</th>
-                <th>Email</th>
+                <th>name</th>
                 <th>Phone</th>
+                <th>Email</th>
                 <th>Status</th>
-                <th>WPM</th>
-                <th>Quiz</th>
-                <th>Actions</th>
+                <th>Typing %</th>
+                <th>Quiz Score</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="tableResult"></tbody>
     </table>
 </div>
 
-<!-- MODAL -->
+<!-- EDIT MODAL -->
 <div id="editModal" class="modal">
     <div class="modal-content">
         <h3>Edit Scores</h3>
@@ -43,8 +44,11 @@
         <label>WPM</label>
         <input type="number" id="editWpm" min="0">
 
-        <label>Quiz</label>
-        <input type="number" id="editQuiz" min="0">
+        <label>Accuracy (%)</label>
+        <input type="number" id="editAccuracy" min="0" max="100">
+
+        <label>Quiz Score</label>
+        <input type="number" id="editquiz_score" min="0">
 
         <div class="modal-actions">
             <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
@@ -58,21 +62,22 @@
 <div id="toast" class="toast"></div>
 
 <script>
-function loadData(enrollment = "") {
+function loadData(val = "") {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "fetch_user.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = () => document.getElementById("tableResult").innerHTML = xhr.responseText;
-    xhr.send("enrollment=" + encodeURIComponent(enrollment));
+    xhr.onload = () => tableResult.innerHTML = xhr.responseText;
+    xhr.send("enrollment=" + encodeURIComponent(val));
 }
 
 window.onload = () => loadData();
-document.getElementById("enrollment").addEventListener("keyup", e => loadData(e.target.value));
+enrollment.addEventListener("keyup", e => loadData(e.target.value));
 
-function editRow(enrollment, wpm, quiz) {
+function editRow(enrollment, wpm, accuracy, quiz_score) {
     editEnrollment.value = enrollment;
     editWpm.value = wpm;
-    editQuiz.value = quiz;
+    editAccuracy.value = accuracy;
+    editquiz_score.value = quiz_score;
     editModal.classList.add("show");
 }
 
@@ -101,22 +106,17 @@ function saveEdit() {
         if (this.responseText.trim() === "success") {
             closeModal();
             loadData(enrollment.value);
-            showToast("Changes saved successfully", "success");
+            showToast("Scores updated successfully", "success");
         } else {
-            showToast("Failed to save changes", "error");
+            showToast("Update failed", "error");
         }
     };
 
-    xhr.onerror = function () {
-        saveBtn.classList.remove("loading");
-        saveBtn.disabled = false;
-        showToast("Network error", "error");
-    };
-
     xhr.send(
-        "enrollment=" + encodeURIComponent(editEnrollment.value) +
-        "&wpm=" + encodeURIComponent(editWpm.value) +
-        "&quiz=" + encodeURIComponent(editQuiz.value)
+        "enrollment=" + editEnrollment.value +
+        "&wpm=" + editWpm.value +
+        "&accuracy=" + editAccuracy.value +
+        "&quiz_score=" + editquiz_score.value
     );
 }
 
@@ -126,7 +126,6 @@ function showToast(msg, type) {
     setTimeout(() => toast.className = "toast", 2500);
 }
 
-/* ESC + outside click */
 document.addEventListener("keydown", e => e.key === "Escape" && closeModal());
 editModal.addEventListener("click", e => e.target === editModal && closeModal());
 </script>

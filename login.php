@@ -13,7 +13,7 @@
 
     <form id="loginForm">
         <div class="input-group">
-            <input type="text" id="username" placeholder="Username">
+            <input type="text" id="name" placeholder="name">
         </div>
 
         <div class="input-group password-group">
