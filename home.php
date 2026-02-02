@@ -48,17 +48,20 @@
         <input type="hidden" id="editEnrollment">
 
         <label>WPM</label>
-        <input type="number" id="editWpm">
+        <input type="number" id="editWpm" min="0">
 
         <label>Quiz</label>
-        <input type="number" id="editQuiz">
+        <input type="number" id="editQuiz" min="0">
 
         <div class="modal-actions">
-            <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+            <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
             <button class="btn-save" onclick="saveEdit()">Save</button>
         </div>
     </div>
 </div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
 
 <script>
 /* Load table */
@@ -95,6 +98,12 @@ function closeModal() {
     document.getElementById("editModal").style.display = "none";
 }
 
+/* Cancel edit */
+function cancelEdit() {
+    closeModal();
+    showToast("Edit cancelled", "cancel");
+}
+
 /* Save edit */
 function saveEdit() {
     const enrollment = document.getElementById("editEnrollment").value;
@@ -109,13 +118,14 @@ function saveEdit() {
         if (this.status === 200 && this.responseText.trim() === "success") {
             closeModal();
             loadData(document.getElementById("enrollment").value);
+            showToast("Changes saved successfully", "success");
         } else {
-            alert("Update failed");
+            showToast("Failed to save changes", "error");
         }
     };
 
     xhr.onerror = function () {
-        alert("Network error");
+        showToast("Network error", "error");
     };
 
     xhr.send(
@@ -123,6 +133,17 @@ function saveEdit() {
         "&wpm=" + encodeURIComponent(wpm) +
         "&quiz=" + encodeURIComponent(quiz)
     );
+}
+
+/* Toast function */
+function showToast(message, type) {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.className = "toast show " + type;
+
+    setTimeout(() => {
+        toast.className = "toast";
+    }, 2500);
 }
 </script>
 
