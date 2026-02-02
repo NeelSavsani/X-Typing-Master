@@ -14,7 +14,7 @@ body {
     justify-content: center;
 }
 
-/* Main box */
+/* Main container */
 .box {
     background: #ffffff;
     padding: 30px;
@@ -95,23 +95,40 @@ table tr:nth-child(even) {
     background: #e0a800;
 }
 
-/* Modal background */
+/* ===== MODAL WITH SMOOTH ANIMATION ===== */
 .modal {
-    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.5);
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
     z-index: 999;
 }
 
-/* Modal box */
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
 .modal-content {
     background: white;
     padding: 20px;
     width: 300px;
     border-radius: 10px;
+
+    transform: scale(0.9) translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: scale(1) translateY(0);
+    opacity: 1;
 }
 
 .modal-content h3 {
@@ -138,7 +155,6 @@ table tr:nth-child(even) {
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
 }
 
 .btn-save {
@@ -148,7 +164,6 @@ table tr:nth-child(even) {
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
 }
 
 .btn-cancel:hover {
@@ -159,7 +174,7 @@ table tr:nth-child(even) {
     background: #0b7a0b;
 }
 
-/* Toast */
+/* ===== TOAST ===== */
 .toast {
     position: fixed;
     bottom: 25px;
@@ -174,12 +189,10 @@ table tr:nth-child(even) {
     z-index: 9999;
 }
 
-/* Show toast */
 .toast.show {
     opacity: 1;
 }
 
-/* Toast types */
 .toast.success {
     background: #28a745;
 }

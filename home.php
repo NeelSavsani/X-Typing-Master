@@ -19,25 +19,23 @@
 
     <h3 class="table-title">Users</h3>
 
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>Enrollment</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Status</th>
-                    <th>WPM</th>
-                    <th>Quiz</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="tableResult">
-                <!-- AJAX DATA -->
-            </tbody>
-        </table>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Enrollment</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>WPM</th>
+                <th>Quiz</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tableResult">
+            <!-- AJAX DATA -->
+        </tbody>
+    </table>
 </div>
 
 <!-- EDIT MODAL -->
@@ -90,21 +88,22 @@ function editRow(enrollment, wpm, quiz) {
     document.getElementById("editEnrollment").value = enrollment;
     document.getElementById("editWpm").value = wpm;
     document.getElementById("editQuiz").value = quiz;
-    document.getElementById("editModal").style.display = "flex";
+
+    document.getElementById("editModal").classList.add("show");
 }
 
 /* Close modal */
 function closeModal() {
-    document.getElementById("editModal").style.display = "none";
+    document.getElementById("editModal").classList.remove("show");
 }
 
-/* Cancel edit */
+/* Cancel */
 function cancelEdit() {
     closeModal();
     showToast("Edit cancelled", "cancel");
 }
 
-/* Save edit */
+/* Save */
 function saveEdit() {
     const enrollment = document.getElementById("editEnrollment").value;
     const wpm = document.getElementById("editWpm").value;
@@ -135,10 +134,10 @@ function saveEdit() {
     );
 }
 
-/* Toast function */
+/* Toast */
 function showToast(message, type) {
     const toast = document.getElementById("toast");
-    toast.innerText = message;
+    toast.textContent = message;
     toast.className = "toast show " + type;
 
     setTimeout(() => {
