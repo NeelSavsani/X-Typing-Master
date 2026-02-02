@@ -3,10 +3,10 @@ include "dbconnect.php";
 
 $enrollment = $_POST['enrollment'] ?? "";
 
-/* Get Max Typing Score */
+/* Max Typing Score */
 $maxRes = mysqli_query($conn, "SELECT MAX(typing_score) AS max_score FROM user");
 $maxRow = mysqli_fetch_assoc($maxRes);
-$maxTypingScore = $maxRow['max_score'] ?: 1; // avoid divide by zero
+$maxTypingScore = $maxRow['max_score'] ?: 1;
 
 $query = "
 SELECT *,
@@ -33,6 +33,17 @@ if (!$result || mysqli_num_rows($result) == 0) {
 $rank = 1;
 while ($row = mysqli_fetch_assoc($result)) {
 
+    // Medal logic
+    if ($rank == 1) {
+        $rankDisplay = "🥇";
+    } elseif ($rank == 2) {
+        $rankDisplay = "🥈";
+    } elseif ($rank == 3) {
+        $rankDisplay = "🥉";
+    } else {
+        $rankDisplay = $rank;
+    }
+
     $typingPercent = round(100 * ($row['typing_score'] / $maxTypingScore), 2);
     $quizPercent   = round(100 * ($row['quiz_score'] / 16000), 2);
     $finalScore    = round($row['final_score'], 2);
@@ -43,7 +54,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     echo "
     <tr>
-        <td>{$rank}</td>
+        <td>{$rankDisplay}</td>
         <td>{$row['enrollment']}</td>
         <td>{$row['name']}</td>
         <td>{$row['mobile']}</td>

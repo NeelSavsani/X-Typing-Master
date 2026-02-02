@@ -11,8 +11,12 @@
     <h2>Participant Scores</h2>
 
     <!-- ACTION BAR -->
-    <div style="display:flex; gap:10px; margin-bottom:15px;">
-        <button class="btn-save" onclick="window.location.href='export_csv.php'">
+    <div class="action-bar">
+        <button class="btn-save" onclick="window.location.href='leaderboard.php'">
+            🏆 Leaderboard
+        </button>
+
+        <button class="btn-cancel" onclick="window.location.href='export_csv.php'">
             📤 Export CSV
         </button>
     </div>

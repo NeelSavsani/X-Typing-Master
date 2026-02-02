@@ -154,3 +154,13 @@ th {
 .toast.success { background: #28a745; }
 .toast.cancel { background: #6c757d; }
 .toast.error { background: #dc3545; }
+
+.action-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.action-bar button {
+    font-size: 14px;
+}
