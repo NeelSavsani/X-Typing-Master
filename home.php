@@ -97,13 +97,13 @@ function closeModal() {
     document.getElementById("editModal").classList.remove("show");
 }
 
-/* Cancel */
+/* Cancel edit */
 function cancelEdit() {
     closeModal();
     showToast("Edit cancelled", "cancel");
 }
 
-/* Save */
+/* Save edit */
 function saveEdit() {
     const enrollment = document.getElementById("editEnrollment").value;
     const wpm = document.getElementById("editWpm").value;
@@ -144,6 +144,20 @@ function showToast(message, type) {
         toast.className = "toast";
     }, 2500);
 }
+
+/* ESC key to close modal */
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+        closeModal();
+    }
+});
+
+/* Click outside modal to close */
+document.getElementById("editModal").addEventListener("click", function (e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
 </script>
 
 </body>
