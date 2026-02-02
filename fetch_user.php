@@ -26,20 +26,19 @@ $query .= " ORDER BY final_score DESC";
 $result = mysqli_query($conn, $query);
 
 if (!$result || mysqli_num_rows($result) == 0) {
-    echo "<tr><td colspan='10' style='color:red;'>No records found</td></tr>";
+    echo "<tr><td colspan='10'>No records found</td></tr>";
     exit;
 }
 
 $rank = 1;
 while ($row = mysqli_fetch_assoc($result)) {
 
-    // Medal logic
     if ($rank == 1) {
-        $rankDisplay = "🥇";
+        $rankDisplay = "<i class='fa-solid fa-medal gold'></i>";
     } elseif ($rank == 2) {
-        $rankDisplay = "🥈";
+        $rankDisplay = "<i class='fa-solid fa-medal silver'></i>";
     } elseif ($rank == 3) {
-        $rankDisplay = "🥉";
+        $rankDisplay = "<i class='fa-solid fa-medal bronze'></i>";
     } else {
         $rankDisplay = $rank;
     }
@@ -64,13 +63,15 @@ while ($row = mysqli_fetch_assoc($result)) {
         <td>{$quizPercent}%</td>
         <td><strong>{$finalScore}%</strong></td>
         <td>
-            <button class='edit-btn'
+            <button class='btn-edit'
                 onclick=\"editRow(
                     '{$row['enrollment']}',
                     '{$row['wpm']}',
                     '{$row['accuracy']}',
                     '{$row['quiz_score']}'
-                )\">Edit</button>
+                )\">
+                <i class='fa-solid fa-pen'></i>
+            </button>
         </td>
     </tr>
     ";

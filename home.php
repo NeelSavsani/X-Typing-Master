@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Competition Dashboard</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 
 <div class="box">
-    <h2>Participant Scores</h2>
+    <h2><i class="fa-solid fa-ranking-star"></i> Participant Scores</h2>
 
     <!-- ACTION BAR -->
     <div class="action-bar">
-        <button class="btn-save" onclick="window.location.href='leaderboard.php'">
-            🏆 Leaderboard
+        <button class="btn-primary"
+                onclick="window.location.href='leaderboard.php'">
+            <i class="fa-solid fa-trophy"></i> Leaderboard
         </button>
 
-        <button class="btn-cancel" onclick="window.location.href='export_csv.php'">
-            📤 Export CSV
+        <button class="btn-secondary"
+                onclick="window.location.href='export_csv.php'">
+            <i class="fa-solid fa-file-export"></i> Export CSV
         </button>
     </div>
 
@@ -50,7 +57,7 @@
 <!-- EDIT MODAL -->
 <div id="editModal" class="modal">
     <div class="modal-content">
-        <h3>Edit Scores</h3>
+        <h3><i class="fa-solid fa-pen-to-square"></i> Edit Scores</h3>
 
         <input type="hidden" id="editEnrollment">
 
@@ -64,9 +71,12 @@
         <input type="number" id="editQuizScore" min="0" max="16000">
 
         <div class="modal-actions">
-            <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
-            <button class="btn-save" id="saveBtn" onclick="saveEdit()">
-                <span>Save</span>
+            <button class="btn-danger" onclick="cancelEdit()">
+                <i class="fa-solid fa-xmark"></i> Cancel
+            </button>
+
+            <button class="btn-success" id="saveBtn" onclick="saveEdit()">
+                <span><i class="fa-solid fa-floppy-disk"></i> Save</span>
             </button>
         </div>
     </div>
