@@ -8,45 +8,42 @@ $maxRes = mysqli_query($conn, "SELECT MAX(typing_score) AS max_score FROM user")
 $maxRow = mysqli_fetch_assoc($maxRes);
 $maxTypingScore = $maxRow['max_score'] ?: 1; // avoid divide by zero
 
-if ($enrollment === "") {
-    $query = "SELECT * FROM user ORDER BY enrollment";
-} else {
-    $query = "SELECT * FROM user WHERE enrollment LIKE '%$enrollment%' ORDER BY enrollment";
+$query = "
+SELECT *,
+(
+    (typing_score / $maxTypingScore) * 100 +
+    (quiz_score / 16000) * 100
+) / 2 AS final_score
+FROM user
+";
+
+if ($enrollment !== "") {
+    $query .= " WHERE enrollment LIKE '%$enrollment%'";
 }
+
+$query .= " ORDER BY final_score DESC";
 
 $result = mysqli_query($conn, $query);
 
-if (mysqli_num_rows($result) == 0) {
-    echo "<tr><td colspan='9' style='color:red;'>No records found</td></tr>";
+if (!$result || mysqli_num_rows($result) == 0) {
+    echo "<tr><td colspan='10' style='color:red;'>No records found</td></tr>";
     exit;
 }
 
+$rank = 1;
 while ($row = mysqli_fetch_assoc($result)) {
+
+    $typingPercent = round(100 * ($row['typing_score'] / $maxTypingScore), 2);
+    $quizPercent   = round(100 * ($row['quiz_score'] / 16000), 2);
+    $finalScore    = round($row['final_score'], 2);
 
     $statusClass = strtolower($row['status']) === "approved"
         ? "status-approved"
         : "status-pending";
 
-    /* Typing % */
-    $typingPercent = round(
-        100 * ($row['typing_score'] / $maxTypingScore),
-        2
-    );
-
-    /* Quiz % (max = 16000) */
-    $quizPercent = round(
-        100 * ($row['quiz_score'] / 16000),
-        2
-    );
-
-    /* Final Score (equal weight) */
-    $finalScore = round(
-        ($typingPercent + $quizPercent) / 2,
-        2
-    );
-
     echo "
     <tr>
+        <td>{$rank}</td>
         <td>{$row['enrollment']}</td>
         <td>{$row['name']}</td>
         <td>{$row['mobile']}</td>
@@ -62,9 +59,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                     '{$row['wpm']}',
                     '{$row['accuracy']}',
                     '{$row['quiz_score']}'
-                )\">
-                Edit
-            </button>
+                )\">Edit</button>
         </td>
-    </tr>";
+    </tr>
+    ";
+
+    $rank++;
 }

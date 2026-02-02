@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Competition Score Dashboard</title>
+    <title>Competition Dashboard</title>
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 
 <div class="box">
     <h2>Participant Scores</h2>
+
+    <!-- ACTION BAR -->
+    <div style="display:flex; gap:10px; margin-bottom:15px;">
+        <button class="btn-save" onclick="window.location.href='export_csv.php'">
+            📤 Export CSV
+        </button>
+    </div>
 
     <input
         type="text"
@@ -20,6 +27,7 @@
     <table>
         <thead>
             <tr>
+                <th>Rank</th>
                 <th>Enrollment</th>
                 <th>Name</th>
                 <th>Phone</th>
@@ -92,17 +100,17 @@ function cancelEdit() {
 }
 
 function saveEdit() {
-    const saveBtn = document.getElementById("saveBtn");
-    saveBtn.classList.add("loading");
-    saveBtn.disabled = true;
+    const btn = document.getElementById("saveBtn");
+    btn.classList.add("loading");
+    btn.disabled = true;
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "update_user.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhr.onload = function () {
-        saveBtn.classList.remove("loading");
-        saveBtn.disabled = false;
+        btn.classList.remove("loading");
+        btn.disabled = false;
 
         if (this.responseText.trim() === "success") {
             closeModal();
