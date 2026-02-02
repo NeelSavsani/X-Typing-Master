@@ -10,12 +10,9 @@
 <div class="box">
     <h2>Search by Enrollment</h2>
 
-    <input
-        type="text"
-        id="enrollment"
-        placeholder="Start typing enrollment number..."
-        autocomplete="off"
-    >
+    <input type="text" id="enrollment"
+           placeholder="Start typing enrollment number..."
+           autocomplete="off">
 
     <h3 class="table-title">Users</h3>
 
@@ -32,13 +29,11 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody id="tableResult">
-            <!-- AJAX DATA -->
-        </tbody>
+        <tbody id="tableResult"></tbody>
     </table>
 </div>
 
-<!-- EDIT MODAL -->
+<!-- MODAL -->
 <div id="editModal" class="modal">
     <div class="modal-content">
         <h3>Edit Scores</h3>
@@ -53,70 +48,59 @@
 
         <div class="modal-actions">
             <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
-            <button class="btn-save" onclick="saveEdit()">Save</button>
+            <button class="btn-save" id="saveBtn" onclick="saveEdit()">
+                <span>Save</span>
+            </button>
         </div>
     </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast" class="toast"></div>
 
 <script>
-/* Load table */
 function loadData(enrollment = "") {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "fetch_user.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    xhr.onload = function () {
-        if (this.status === 200) {
-            document.getElementById("tableResult").innerHTML = this.responseText;
-        }
-    };
-
+    xhr.onload = () => document.getElementById("tableResult").innerHTML = xhr.responseText;
     xhr.send("enrollment=" + encodeURIComponent(enrollment));
 }
 
 window.onload = () => loadData();
+document.getElementById("enrollment").addEventListener("keyup", e => loadData(e.target.value));
 
-document.getElementById("enrollment").addEventListener("keyup", function () {
-    loadData(this.value);
-});
-
-/* Open modal */
 function editRow(enrollment, wpm, quiz) {
-    document.getElementById("editEnrollment").value = enrollment;
-    document.getElementById("editWpm").value = wpm;
-    document.getElementById("editQuiz").value = quiz;
-
-    document.getElementById("editModal").classList.add("show");
+    editEnrollment.value = enrollment;
+    editWpm.value = wpm;
+    editQuiz.value = quiz;
+    editModal.classList.add("show");
 }
 
-/* Close modal */
 function closeModal() {
-    document.getElementById("editModal").classList.remove("show");
+    editModal.classList.remove("show");
 }
 
-/* Cancel edit */
 function cancelEdit() {
     closeModal();
     showToast("Edit cancelled", "cancel");
 }
 
-/* Save edit */
 function saveEdit() {
-    const enrollment = document.getElementById("editEnrollment").value;
-    const wpm = document.getElementById("editWpm").value;
-    const quiz = document.getElementById("editQuiz").value;
+    const saveBtn = document.getElementById("saveBtn");
+    saveBtn.classList.add("loading");
+    saveBtn.disabled = true;
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "update_user.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhr.onload = function () {
-        if (this.status === 200 && this.responseText.trim() === "success") {
+        saveBtn.classList.remove("loading");
+        saveBtn.disabled = false;
+
+        if (this.responseText.trim() === "success") {
             closeModal();
-            loadData(document.getElementById("enrollment").value);
+            loadData(enrollment.value);
             showToast("Changes saved successfully", "success");
         } else {
             showToast("Failed to save changes", "error");
@@ -124,40 +108,27 @@ function saveEdit() {
     };
 
     xhr.onerror = function () {
+        saveBtn.classList.remove("loading");
+        saveBtn.disabled = false;
         showToast("Network error", "error");
     };
 
     xhr.send(
-        "enrollment=" + encodeURIComponent(enrollment) +
-        "&wpm=" + encodeURIComponent(wpm) +
-        "&quiz=" + encodeURIComponent(quiz)
+        "enrollment=" + encodeURIComponent(editEnrollment.value) +
+        "&wpm=" + encodeURIComponent(editWpm.value) +
+        "&quiz=" + encodeURIComponent(editQuiz.value)
     );
 }
 
-/* Toast */
-function showToast(message, type) {
-    const toast = document.getElementById("toast");
-    toast.textContent = message;
+function showToast(msg, type) {
+    toast.textContent = msg;
     toast.className = "toast show " + type;
-
-    setTimeout(() => {
-        toast.className = "toast";
-    }, 2500);
+    setTimeout(() => toast.className = "toast", 2500);
 }
 
-/* ESC key to close modal */
-document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-        closeModal();
-    }
-});
-
-/* Click outside modal to close */
-document.getElementById("editModal").addEventListener("click", function (e) {
-    if (e.target === this) {
-        closeModal();
-    }
-});
+/* ESC + outside click */
+document.addEventListener("keydown", e => e.key === "Escape" && closeModal());
+editModal.addEventListener("click", e => e.target === editModal && closeModal());
 </script>
 
 </body>
