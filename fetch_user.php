@@ -4,8 +4,8 @@ include "dbconnect.php";
 $enrollment = $_POST['enrollment'] ?? "";
 
 /* Get Max Typing Score */
-$maxResult = mysqli_query($conn, "SELECT MAX(typing_score) AS max_score FROM user");
-$maxRow = mysqli_fetch_assoc($maxResult);
+$maxRes = mysqli_query($conn, "SELECT MAX(typing_score) AS max_score FROM user");
+$maxRow = mysqli_fetch_assoc($maxRes);
 $maxTypingScore = $maxRow['max_score'] ?: 1; // avoid divide by zero
 
 if ($enrollment === "") {
@@ -17,7 +17,7 @@ if ($enrollment === "") {
 $result = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($result) == 0) {
-    echo "<tr><td colspan='8' style='color:red;'>No records found</td></tr>";
+    echo "<tr><td colspan='9' style='color:red;'>No records found</td></tr>";
     exit;
 }
 
@@ -27,9 +27,21 @@ while ($row = mysqli_fetch_assoc($result)) {
         ? "status-approved"
         : "status-pending";
 
-    /* Typing Percentage Formula */
-    $typingPercentage = round(
+    /* Typing % */
+    $typingPercent = round(
         100 * ($row['typing_score'] / $maxTypingScore),
+        2
+    );
+
+    /* Quiz % (max = 16000) */
+    $quizPercent = round(
+        100 * ($row['quiz_score'] / 16000),
+        2
+    );
+
+    /* Final Score (equal weight) */
+    $finalScore = round(
+        ($typingPercent + $quizPercent) / 2,
         2
     );
 
@@ -40,8 +52,9 @@ while ($row = mysqli_fetch_assoc($result)) {
         <td>{$row['mobile']}</td>
         <td>{$row['email']}</td>
         <td class='{$statusClass}'>" . ucfirst($row['status']) . "</td>
-        <td>{$typingPercentage}%</td>
-        <td>{$row['quiz_score']}</td>
+        <td>{$typingPercent}%</td>
+        <td>{$quizPercent}%</td>
+        <td><strong>{$finalScore}%</strong></td>
         <td>
             <button class='edit-btn'
                 onclick=\"editRow(

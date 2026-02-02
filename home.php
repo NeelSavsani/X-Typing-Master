@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Scores Dashboard</title>
+    <title>Competition Score Dashboard</title>
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 
 <div class="box">
-    <h2>User Competition Records</h2>
-<br>
+    <h2>Participant Scores</h2>
+
     <input
         type="text"
         id="enrollment"
@@ -21,12 +21,13 @@
         <thead>
             <tr>
                 <th>Enrollment</th>
-                <th>name</th>
+                <th>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Status</th>
                 <th>Typing %</th>
-                <th>Quiz Score</th>
+                <th>Quiz %</th>
+                <th>Final Score</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -48,7 +49,7 @@
         <input type="number" id="editAccuracy" min="0" max="100">
 
         <label>Quiz Score</label>
-        <input type="number" id="editquiz_score" min="0">
+        <input type="number" id="editQuizScore" min="0" max="16000">
 
         <div class="modal-actions">
             <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
@@ -73,11 +74,11 @@ function loadData(val = "") {
 window.onload = () => loadData();
 enrollment.addEventListener("keyup", e => loadData(e.target.value));
 
-function editRow(enrollment, wpm, accuracy, quiz_score) {
+function editRow(enrollment, wpm, accuracy, quizScore) {
     editEnrollment.value = enrollment;
     editWpm.value = wpm;
     editAccuracy.value = accuracy;
-    editquiz_score.value = quiz_score;
+    editQuizScore.value = quizScore;
     editModal.classList.add("show");
 }
 
@@ -116,7 +117,7 @@ function saveEdit() {
         "enrollment=" + editEnrollment.value +
         "&wpm=" + editWpm.value +
         "&accuracy=" + editAccuracy.value +
-        "&quiz_score=" + editquiz_score.value
+        "&quiz_score=" + editQuizScore.value
     );
 }
 

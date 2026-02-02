@@ -6,7 +6,7 @@ $wpm = $_POST['wpm'];
 $accuracy = $_POST['accuracy'];
 $quiz_score = $_POST['quiz_score'];
 
-/* Typing Score Formula */
+/* Typing Score */
 $typing_score = $wpm * ($accuracy / 100);
 
 $query = "
