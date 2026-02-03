@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2026 at 05:14 PM
+-- Generation Time: Feb 03, 2026 at 07:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -70,9 +70,9 @@ INSERT INTO `user` (`enrollment`, `name`, `mobile`, `email`, `status`, `wpm`, `a
 ('23BECE30303 ', 'Brijesh Rakholiya', 9773069019, 'brijeshrakholiya001@gmail.com', 'approved', 0, 0, 0, 0, 0),
 ('23BECE30312', 'Raval janvi', 7284087402, 'Ravaljanvi2006@gmail.com', 'approved', 0, 0, 0, 0, 0),
 ('23BECE30322', 'Abhishek Sangani', 9712130204, 'abhisheksangani5@gmail.com', 'approved', 0, 0, 0, 0, 0),
-('23bece30323', 'NEHANSHI SANGHANI', 9054791036, 'nehanshisanghani261@gmail.com', 'approved', 0, 0, 0, 0, 0),
+('23bece30323', 'NEHANSHI SANGHANI', 9054791076, 'nehanshisanghani261@gmail.com', 'approved', 0, 0, 0, 0, 0),
 ('23BECE30325', 'MANN SAVSANI', 7041864674, 'mannsavsani@gmail.com', 'approved', 0, 0, 0, 0, 0),
-('23bece30326', 'Neel savsani', 9712192640, 'neelsavsani7@gmail.com', 'approved', 0, 0, 0, 0, 0),
+('23bece30326', 'Neel savsani', 9712192640, 'neelsavsani7@gmail.com', 'approved', 56, 92, 52, 15000, 0),
 ('23BECE30331', 'Janvi Shah', 9016753443, 'shahjanvi2005@gmail.com', 'approved', 0, 0, 0, 0, 0),
 ('23BECE30352', 'Jeel suchak', 7201015124, 'jeelsuchak1512@gmail.com', 'approved', 0, 0, 0, 0, 0),
 ('23BECE30353 ', 'Preet sudani', 8849216742, 'Preetsudani17@gmail.com', 'approved', 0, 0, 0, 0, 0),
@@ -91,7 +91,7 @@ INSERT INTO `user` (`enrollment`, `name`, `mobile`, `email`, `status`, `wpm`, `a
 ('24BECE30313', 'Ayush Prajapati', 7016367124, 'ayushpra36@gmail.com', 'approved', 0, 0, 0, 0, 0),
 ('24BECE30491', 'Manav patel', 6355833722, 'manavdadhaniya96@gmail.com', 'approved', 0, 0, 0, 0, 0),
 ('24bece54006', 'Pal donda', 9510723893, 'donda951072@gmail.com', 'approved', 0, 0, 0, 0, 0),
-('24bece54039 ', 'JAYMEEN VAGHELA', 9601429218, 'jaymeenvaghela07@gmail.com', 'approved', 0, 0, 0, 0, 0),
+('24bece54039 ', 'JAYMEEN VAGHELA', 9601429218, 'jaymeenvaghela07@gmail.com', 'approved', 25, 72, 18, 14000, 0),
 ('24BECE54041 ', 'Jeel Vekariya', 9726230239, 'vekariyajeel0@gmail.com', 'approved', 0, 0, 0, 0, 0),
 ('24becse54050', 'Vyas Jenil Nileshkumar', 9016158393, 'VYASJENIL0@GMAIL.COM', 'approved', 0, 0, 0, 0, 0),
 ('24BEIT30103', 'Dhruv Patel', 9601967127, 'dp046744@gmail.com', 'approved', 0, 0, 0, 0, 0),
