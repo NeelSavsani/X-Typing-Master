@@ -2,8 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Leaderboard</title>
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -37,13 +40,26 @@ $res = mysqli_query($conn, $query);
 $rank = 1;
 
 while ($row = mysqli_fetch_assoc($res)) {
+
+    if ($rank == 1) {
+        $rankDisplay = "<i class='fa-solid fa-medal gold'></i>";
+    } elseif ($rank == 2) {
+        $rankDisplay = "<i class='fa-solid fa-medal silver'></i>";
+    } elseif ($rank == 3) {
+        $rankDisplay = "<i class='fa-solid fa-medal bronze'></i>";
+    } else {
+        $rankDisplay = $rank;
+    }
+
     echo "<tr>
-        <td>{$rank}</td>
+        <td>{$rankDisplay}</td>
         <td>{$row['name']}</td>
-        <td>" . round($row['final_score'], 2) . "%</td>
+        <td><strong>" . round($row['final_score'], 2) . "%</strong></td>
     </tr>";
+
     $rank++;
 }
+
 ?>
 
     </table>
