@@ -1,93 +1,133 @@
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
+/* =========================
+   PAGE BACKGROUND
+========================= */
 body {
-    height: 100vh;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1a2233, #0b0f14 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8eaf0;
 }
 
-/* Login Card */
+/* =========================
+   LOGIN CARD
+========================= */
 .login-container {
-    background: #ffffff;
-    width: 340px;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  width: 360px;
+  padding: 32px;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 24, 38, 0.96),
+    rgba(11, 15, 20, 0.96)
+  );
+  border-radius: 16px;
+  border: 1px solid rgba(0, 180, 255, 0.25);
+  box-shadow:
+    0 0 0 1px rgba(0,180,255,0.2),
+    0 25px 60px rgba(0,0,0,0.85);
 }
 
-/* Heading */
+/* =========================
+   TITLE
+========================= */
 .login-container h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #333;
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: #00b4ff;
 }
 
-/* Input Groups */
+/* =========================
+   INPUT GROUP
+========================= */
 .input-group {
-    position: relative;
-    margin-bottom: 18px;
+  position: relative;
+  margin-bottom: 18px;
 }
 
 .input-group input {
-    width: 100%;
-    padding: 12px 42px 12px 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: 0.3s;
+  width: 100%;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #0b0f14, #070a0f);
+  border: 1px solid #263044;
+  border-radius: 8px;
+  color: #e8eaf0;
+  font-size: 14px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.input-group input::placeholder {
+  color: #9aa4b2;
 }
 
 .input-group input:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 5px rgba(102, 126, 234, 0.4);
-    outline: none;
+  outline: none;
+  border-color: #00b4ff;
+  box-shadow: 0 0 8px rgba(0,180,255,0.6);
 }
 
-/* Password Eye Icon */
+/* =========================
+   PASSWORD ICON
+========================= */
 .toggle-password {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 16px;
-    color: #777;
-    transition: 0.3s;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #9aa4b2;
 }
 
 .toggle-password:hover {
-    color: #667eea;
+  color: #00b4ff;
 }
 
-/* Login Button */
+/* =========================
+   LOGIN BUTTON
+========================= */
 button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    background: #667eea;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #007cff, #00b4ff);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  box-shadow:
+    0 8px 24px rgba(0,180,255,0.35),
+    inset 0 -2px 0 rgba(0,0,0,0.25);
 }
 
 button:hover {
-    background: #5a67d8;
+  opacity: 0.95;
 }
 
-/* Responsive */
-@media (max-width: 400px) {
-    .login-container {
-        width: 90%;
-    }
+button:active {
+  transform: translateY(1px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 420px) {
+  .login-container {
+    width: 90%;
+  }
 }

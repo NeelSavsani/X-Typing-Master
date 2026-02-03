@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <ta charset="UTF-8">
     <title>Competition Dashboard</title>
 
     <!-- Font Awesome -->
@@ -34,6 +36,7 @@
         placeholder="Search by enrollment..."
         autocomplete="off"
     >
+    <div class="table-wrapper">
 
     <table>
         <thead>
@@ -52,6 +55,7 @@
         </thead>
         <tbody id="tableResult"></tbody>
     </table>
+    </div>
 </div>
 
 <!-- EDIT MODAL -->
@@ -85,6 +89,13 @@
 <div id="toast" class="toast"></div>
 
 <script>
+    function openEditModal() {
+  document.getElementById("editModal").classList.add("show");
+}
+function closeEditModal() {
+  document.getElementById("editModal").classList.remove("show");
+}
+
 function loadData(val = "") {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "fetch_user.php", true);

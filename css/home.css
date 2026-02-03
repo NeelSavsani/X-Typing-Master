@@ -1,180 +1,445 @@
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
+/* =========================
+   PAGE BACKGROUND
+========================= */
 body {
-    background: #f2f2f2;
-    padding: 30px;
-    display: flex;
-    justify-content: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1a2233, #0b0f14 70%);
+  padding: 40px 20px;
+  color: #e8eaf0;
 }
 
+/* =========================
+   MAIN CONTAINER
+========================= */
 .box {
-    background: #fff;
-    padding: 30px;
-    width: 100%;
-    max-width: 1300px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  max-width: 1300px;
+  margin: auto;
+  padding: 28px;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 24, 38, 0.96),
+    rgba(11, 15, 20, 0.96)
+  );
+  border-radius: 18px;
+  border: 1px solid rgba(0,180,255,0.25);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    0 0 0 1px rgba(0,180,255,0.25),
+    0 25px 80px rgba(0,0,0,0.85),
+    0 0 45px rgba(0,180,255,0.18);
 }
 
-h2 {
-    margin-bottom: 15px;
+/* =========================
+   HEADINGS
+========================= */
+.box h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  margin-bottom: 18px;
+  color: #00b4ff;
+  text-shadow: 0 0 12px rgba(0,180,255,0.6);
 }
 
+/* =========================
+   ACTION BAR
+========================= */
 .action-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
-/* Buttons */
+/* =========================
+   BUTTONS
+========================= */
 button {
-    border: none;
-    border-radius: 6px;
-    padding: 8px 14px;
-    cursor: pointer;
-    font-size: 14px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffffff;
 }
 
 .btn-primary {
-    background: #4f46e5;
-    color: white;
+  background: linear-gradient(135deg, #007cff, #3b82f6);
 }
 
 .btn-secondary {
-    background: #374151;
-    color: white;
+  background: #374151;
 }
-
+.btn-cancel {
+  background: #6b7280;
+}
 .btn-success {
-    background: #16a34a;
-    color: white;
+  background: #22c55e;
 }
 
 .btn-danger {
-    background: #dc2626;
-    color: white;
+  background: #ef4444;
 }
 
 .btn-edit {
-    background: #facc15;
+  background: #facc15;
+  color: #000;
 }
 
 button:hover {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
-/* Input */
+/* =========================
+   SEARCH INPUT
+========================= */
 input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+  width: 100%;
+  max-width: 360px;
+  padding: 12px;
+  background: linear-gradient(180deg, #0b0f14, #070a0f);
+  border-radius: 8px;
+  border: 1px solid #263044;
+  color: #e8eaf0;
+  margin-bottom: 16px;
 }
 
-/* Table */
+input::placeholder {
+  color: #9aa4b2;
+}
+
+input:focus {
+  outline: none;
+  border-color: #00b4ff;
+  box-shadow: 0 0 8px rgba(0,180,255,0.6);
+}
+
+/* =========================
+   TABLE
+========================= */
 table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
+  padding: 12px;
+  border: 1px solid #263044;
+  text-align: center;
 }
 
 th {
-    background: #6366f1;
-    color: white;
+  background: linear-gradient(90deg, #0047ff, #3b82f6);
+  color: #ffffff;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
-/* Status */
-.status-approved { color: green; font-weight: bold; }
-.status-pending  { color: red; font-weight: bold; }
+td {
+  color: #dbe4f0;
+}
 
-/* Medals */
-.gold   { color: #facc15; }
-.silver { color: #9ca3af; }
-.bronze { color: #d97706; }
+tr:nth-child(even) {
+  background: rgba(255,255,255,0.02);
+}
 
-/* Modal */
+tr:hover {
+  background: rgba(0,180,255,0.06);
+}
+
+/* =========================
+   STATUS
+========================= */
+.status-approved {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.status-pending {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* =========================
+   MODAL
+========================= */
 .modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .modal.show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .modal-content {
-    background: white;
-    padding: 20px;
-    width: 330px;
-    border-radius: 10px;
-    transform: scale(0.9);
-    transition: 0.3s;
+  width: 360px;
+  padding: 22px;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 24, 38, 0.96),
+    rgba(11, 15, 20, 0.96)
+  );
+  border-radius: 14px;
+  border: 1px solid rgba(0,180,255,0.35);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.9),
+    0 0 40px rgba(0,180,255,0.25);
 }
 
-.modal.show .modal-content {
-    transform: scale(1);
+.modal-content h3 {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #00b4ff;
 }
 
+/* =========================
+   MODAL ACTIONS
+========================= */
 .modal-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
 }
 
-/* Save loader */
-.btn-success.loading span {
-    display: none;
-}
-
-.btn-success.loading::after {
-    content: "";
-    width: 16px;
-    height: 16px;
-    border: 3px solid #fff;
-    border-top: 3px solid transparent;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Toast */
+/* =========================
+   TOAST
+========================= */
 .toast {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    padding: 12px 20px;
-    color: #fff;
-    border-radius: 6px;
-    opacity: 0;
-    transition: 0.4s;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: #ffffff;
+  opacity: 0;
+  transition: 0.4s;
 }
 
 .toast.show { opacity: 1; }
-.toast.success { background: #16a34a; }
+.toast.success { background: #22c55e; }
+.toast.error   { background: #ef4444; }
 .toast.cancel  { background: #6b7280; }
-.toast.error   { background: #dc2626; }
+
+
+/* ===== TOP 3 RANK MEDAL COLORS ===== */
+
+/* Gold - Rank 1 */
+.gold {
+  color: #e6bb13ee; /* gold */
+  font-size: 18px;
+  text-shadow: 0 0 8px rgba(250, 204, 21, 0.6);
+}
+
+/* Silver - Rank 2 */
+.silver {
+  color: #9ca3af; /* silver */
+  font-size: 18px;
+  text-shadow: 0 0 8px rgba(156, 163, 175, 0.6);
+}
+
+/* Bronze - Rank 3 */
+.bronze {
+  color: #cc730eec; /* bronze */
+  font-size: 18px;
+  text-shadow: 0 0 8px rgba(217, 119, 6, 0.6);
+}
+
+.gold:hover,
+.silver:hover,
+.bronze:hover {
+  transform: scale(1.1);
+  transition: 0.2s ease;
+}
+
+/* ===== TOP 3 MEDAL LOAD ANIMATION ===== */
+
+@keyframes medalReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Apply animation */
+.gold,
+.silver,
+.bronze {
+  animation: medalReveal 0.6s ease-out both;
+}
+
+/* Slight delay for hierarchy */
+.silver {
+  animation-delay: 0.08s;
+}
+
+.bronze {
+  animation-delay: 0.16s;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+    padding: 20px 12px;
+    font-size: 15px;
+  }
+
+  .box {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  /* Action bar stacks */
+  .action-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .action-bar button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Search input full width */
+  input {
+    max-width: 100%;
+  }
+
+  /* ===== TABLE HANDLING ===== */
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+    th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  /* Medal icons slightly smaller */
+  .gold,
+  .silver,
+  .bronze {
+    font-size: 16px;
+  }
+
+  /* Edit button tap-friendly */
+  .btn-edit {
+    padding: 8px 12px;
+  }
+
+  /* ===== MODAL ===== */
+  .modal-content {
+    width: 92%;
+    max-width: 360px;
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  h2 {
+    font-size: 16px;
+  }
+
+  th {
+    font-size: 12px;
+  }
+
+  td {
+    font-size: 12px;
+  }
+
+  button {
+    font-size: 13px;
+  }
+
+  /* Reduce glow for performance */
+  .box {
+    box-shadow:
+      0 15px 40px rgba(0,0,0,0.8),
+      0 0 25px rgba(0,180,255,0.12);
+  }
+}
+
+/* =========================
+   TABLE SCROLL FIX (MOBILE)
+========================= */
+
+/* Wrapper controls horizontal scroll */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth on mobile */
+}
+
+/* Prevent table from shrinking */
+.table-wrapper table {
+  min-width: 1100px; /* adjust based on columns */
+  border-collapse: collapse;
+}
+
+/* Prevent text wrapping inside cells */
+.table-wrapper th,
+.table-wrapper td {
+  white-space: nowrap;
+}
+
+/* Table header clarity */
+.table-wrapper th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
