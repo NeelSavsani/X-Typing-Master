@@ -16,13 +16,18 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'expirochain.team@gmail.com';
-    $mail->Password = 'jcpw bjzu wzvk rjrg'; // ⚠️ use app password
+    $mail->Username = 'vedrathod2730@gmail.com';
+    $mail->Password = 'wzbr ticd ocyg wwfr'; // ⚠️ use app password
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
+    $mail->addEmbeddedImage(
+    'images/poster.jpeg',   // image path on server
+    'xenesis_logo'          // CID (unique ID)
+);
+
 
     /* MAIL META */
-    $mail->setFrom('expirochain.team@gmail.com', 'X-Typing-Master');
+    $mail->setFrom('vedrathod2730@gmail.com', 'X-Typing-Master');
     $mail->isHTML(true);
     $mail->Subject = 'Join the Official WhatsApp Group: X-Typing-Master';
 
@@ -76,7 +81,7 @@ try {
     </p>
 
     <p>
-        Please make sure to join the group at the earliest so that you don’t miss
+        Please make sure to join the group at the earliest so that you don't miss
         any important updates.
     </p>
 
@@ -84,7 +89,38 @@ try {
         If you face any issues while joining, feel free to contact us directly.
     </p>
 
-    <br>
+    <!-- EVENT DETAILS -->
+    <div style='
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        margin: 20px 0;
+    '>
+        <h3 style='margin-top: 0; color: #2c7be5;'>
+            📌 Event Details
+        </h3>
+
+        <p><strong>Event Name:</strong> X-TYPING-MASTER</p>
+
+        <p><strong>Event Coordinator:</strong></p>
+        <ul style='margin-top: 5px; padding-left: 18px;'>
+            <li>Ved Rathod</li>
+        </ul>
+
+        <p><strong>Event Volunteers:</strong></p>
+        <ul style='margin-top: 5px; padding-left: 18px;'>
+            <li>Pinal Pujara</li>
+            <li>Ayan Ansari</li>
+            <li>Gaurav Prajapati</li>
+            <li>Savay Raiyani</li>
+        </ul>
+
+        <p>
+            <strong>Location:</strong><br>
+            AF-8, 1st Floor, Shift-2
+        </p>
+    </div>
 
     <p>
         Warm regards,<br>
@@ -99,25 +135,25 @@ try {
         </span>
     </p>
 
-</div>
+    <img src='cid:xenesis_logo'
+         alt='Xenesis Techfest'
+         style='max-width:500px; margin-top:15px; display:block;'>
 
+</div>
     ";
 
     /* FETCH EMAILS (FROM ARRAY OR DB) */
     $emailList = [
         'neelsavsani7@gmail.com',
-        'neelsavsani1@gmail.com',
-        'neelsavsani2@gmail.com',
-        'neel.ldrp.16@gmail.com',
-        'vekariyajeel0@gmail.com',
         'abhisheksangani5@gmail.com'
+        // 'vedrathod2730@gmail.com'
     ];
 
     foreach ($emailList as $email) {
-        $email = strtolower(trim($email)); // normalize
         $mail->clearAddresses();
         $mail->addAddress($email);
         $mail->send();
+        echo "Email sent to" .$email. "<br>";
     }
 
     echo "Emails sent successfully.";
